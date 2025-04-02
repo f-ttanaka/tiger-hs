@@ -17,8 +17,10 @@ data Expr
   | IntExpr Integer
   | StrExpr String
   | CallExpr Id [Expr]
-  | ArithBinOpExpr ArithBinOp Expr Expr
-  | BoolBinOpExpr BoolBinOp Expr Expr
+  | ArithBinExpr ArithBinOp Expr Expr
+  | NegativeExpr Expr
+  | CompExpr CompOp Expr Expr
+  | BoolBinExpr BoolBinOp Expr Expr
   | IfExpr Expr Expr (Maybe Expr)
   | WhileExpr Expr Expr
   | ForExpr Id Expr Expr Expr
@@ -32,7 +34,9 @@ data LValue
 
 data ArithBinOp = Add | Sub | Mul | Div
 
-data BoolBinOp = Eql | GT | GE | LT | LE | Neq | And | Or
+data CompOp = Eql | Gt | Ge | Lt | Le | Neq
+
+data BoolBinOp = And | Or
 
 -- type
 data Typ
@@ -47,3 +51,5 @@ data Decl
   | FunDecl Id TypField (Maybe TypId) Expr
 
 type Decls = [Decl]
+
+data Program = Defs Decls | EntryPoint Expr

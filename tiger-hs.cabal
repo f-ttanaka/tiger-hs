@@ -27,8 +27,7 @@ library
   exposed-modules:
       Tiger.Common
       Tiger.Data.AST
-      Tiger.Parser.Decl
-      Tiger.Parser.Expr
+      Tiger.Parser.AST
       Tiger.Parser.Internal
   other-modules:
       Paths_tiger_hs

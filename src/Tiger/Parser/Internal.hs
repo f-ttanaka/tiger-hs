@@ -35,7 +35,14 @@ reservedNames =
     "then",
     "else",
     "array",
-    "of"
+    "of",
+    "while",
+    "do",
+    "for",
+    "to",
+    "break",
+    "let",
+    "in"
   ]
 
 reservedOps :: [String]
@@ -44,12 +51,18 @@ reservedOps =
     "->",
     "-",
     "*",
+    "/",
     "+",
-    "==",
     "<",
+    ">",
     ":=",
     ":",
-    "="
+    "=",
+    "<>",
+    "<=",
+    ">=",
+    "&",
+    "|"
   ]
 
 identLetter :: Parser Char
@@ -114,8 +127,9 @@ type Op a = Ex.Operator Text () Identity a
 type Operators a = Ex.OperatorTable Text () Identity a
 
 infixOp :: String -> (a -> a -> a) -> Ex.Assoc -> Op a
-infixOp x op = Ex.Infix (reservedOp x >> return op)
+infixOp x op = Ex.Infix (reservedOp x *> return op)
 
+-- infix, left association
 infixOpAL :: String -> (a -> a -> a) -> Op a
 infixOpAL x op = infixOp x op Ex.AssocLeft
 
